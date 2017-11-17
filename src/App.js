@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ProductsGrid from "./components/productGrid";
 import { fetchProducts } from "./state/product/actions";
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>shopping cart</h1>
-        {products.map(product => <h3>{product.name}</h3>)}
+        <ProductsGrid products={products} />
       </div>
     );
   }
