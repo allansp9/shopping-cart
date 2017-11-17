@@ -8,8 +8,6 @@ import registerServiceWorker from "./registerServiceWorker";
 
 const store = configureStore({});
 
-store.dispatch(fetchProducts());
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

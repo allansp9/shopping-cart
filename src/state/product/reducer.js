@@ -5,7 +5,9 @@ import {
 } from "../actionTypes";
 
 const initialState = {
-  isLoading: false
+  isLoading: false,
+  products: [],
+  error: null
 };
 
 export default (state = initialState, action) => {
