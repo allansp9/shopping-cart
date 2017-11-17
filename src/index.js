@@ -4,6 +4,9 @@ import { Provider } from "react-redux";
 import App from "./App";
 import configureStore from "./state/store";
 import registerServiceWorker from "./registerServiceWorker";
+import * as productApi from "./libs/product/api";
+
+productApi.fetchAll().then(products => console.log("products", products));
 
 const store = configureStore({});
 
