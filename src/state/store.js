@@ -10,7 +10,7 @@ export default initialState => {
   const enhancers = composeWithDevTools(applyMiddleware(sagaMiddleware));
   const store = createStore(reducer, initialState, enhancers);
 
-  sagas.map(sagaMiddleware);
+  sagas.map(sagaMiddleware.run);
 
   return store;
 };
