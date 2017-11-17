@@ -5,6 +5,7 @@ import { fetchProducts } from "./state/product/actions";
 import App from "./App";
 import configureStore from "./state/store";
 import registerServiceWorker from "./registerServiceWorker";
+import "./libs/cart/api";
 
 const store = configureStore({});
 
