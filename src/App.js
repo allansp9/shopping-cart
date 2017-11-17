@@ -3,13 +3,17 @@ import { connect } from "react-redux";
 import ProductsGrid from "./components/productGrid";
 import CartTable from "./components/cartTable";
 import { fetchProducts } from "./state/product/actions";
-import { fetchCart } from "./state/cart/actions";
+import { fetchCart, addToCart } from "./state/cart/actions";
 
 class App extends Component {
   componentWillMount() {
     this.props.fetchProducts();
     this.props.fetchCart();
   }
+
+  addToCart = product => {
+    this.props.addToCart(product._id, 1);
+  };
 
   render() {
     const { cart, isProductLoading, products } = this.props;
@@ -20,7 +24,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} addToCart={this.addToCart} />
         <h1>Carrinho</h1>
         <CartTable cart={cart} />
       </div>
@@ -47,7 +51,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchProducts,
-  fetchCart
+  fetchCart,
+  addToCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

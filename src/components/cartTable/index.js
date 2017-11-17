@@ -30,8 +30,8 @@ const CartTable = ({ cart }) => (
     <tbody>
       {cart.items.map(item => (
         <tr key={item.productId}>
-          <td>name</td>
-          <td>price</td>
+          <td>{item.product.name}</td>
+          <td>{item.product.price}</td>
           <td>{item.quantity}</td>
         </tr>
       ))}
