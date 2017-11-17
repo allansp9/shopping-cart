@@ -1,3 +1,3 @@
 import cartSagas from "./cart/sagas";
 import productSagas from "./product/sagas";
-export default [cartSagas, productSagas];
+export default [productSagas, cartSagas];
