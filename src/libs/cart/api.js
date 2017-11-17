@@ -28,7 +28,3 @@ export const addToCart = async (productId, quantity = 1) => {
 
   return newCart;
 };
-
-addToCart("5a0edddefd0cb01c641d92bf", 5);
-
-console.log("cart", getFromLocalStorage());
