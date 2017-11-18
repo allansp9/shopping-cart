@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { addToCart } from "../../state/cart/sagas";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { addToCart } from '../../state/cart/sagas';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,14 +31,12 @@ const ProductGrid = ({ products, addToCart }) => (
 );
 
 ProductGrid.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      picture: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  addToCart: PropTypes.func.isRequired
+  products: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default ProductGrid;

@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { removeFromCart } from '../../state/cart/sagas';
 
 const Wrapper = styled.table`
   width: 100%;
@@ -17,8 +18,7 @@ const Wrapper = styled.table`
     background: #ddd;
   }
 `;
-
-const CartTable = ({ cart }) => (
+const CartTable = ({ cart, removeFromCart }) => (
   <Wrapper>
     <thead>
       <tr>
@@ -30,7 +30,10 @@ const CartTable = ({ cart }) => (
     <tbody>
       {cart.items.map(item => (
         <tr key={item.productId}>
-          <td>{item.product.name}</td>
+          <td>
+            {item.product.name}
+            <button onClick={() => removeFromCart(item.productId)}>delete</button>
+          </td>
           <td>{item.product.price}</td>
           <td>{item.quantity}</td>
         </tr>
@@ -41,17 +44,16 @@ const CartTable = ({ cart }) => (
 
 CartTable.propTypes = {
   cart: PropTypes.shape({
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        product: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          price: PropTypes.number.isRequired
-        }).isRequired,
-        productId: PropTypes.string.isRequired,
-        quantity: PropTypes.number.isRequired
-      })
-    ).isRequired
-  }).isRequired
+    items: PropTypes.arrayOf(PropTypes.shape({
+      product: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+      }).isRequired,
+      productId: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+    })).isRequired,
+  }).isRequired,
+  removeFromCart: PropTypes.func.isRequired,
 };
 
 export default CartTable;

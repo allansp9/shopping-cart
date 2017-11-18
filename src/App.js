@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import ProductsGrid from "./components/productGrid";
-import CartTable from "./components/cartTable";
-import { fetchProducts } from "./state/product/actions";
-import { fetchCart, addToCart } from "./state/cart/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ProductsGrid from './components/productGrid';
+import CartTable from './components/cartTable';
+import { fetchProducts } from './state/product/actions';
+import { fetchCart, addToCart, removeFromCart } from './state/cart/actions';
 
 class App extends Component {
   componentWillMount() {
@@ -13,6 +13,10 @@ class App extends Component {
 
   addToCart = product => {
     this.props.addToCart(product._id, 1);
+  };
+
+  removeFromCart = product => {
+    this.props.removeFromCart(product);
   };
 
   render() {
@@ -26,33 +30,33 @@ class App extends Component {
       <div className="App">
         <ProductsGrid products={products} addToCart={this.addToCart} />
         <h1>Carrinho</h1>
-        <CartTable cart={cart} />
+        <CartTable cart={cart} removeFromCart={this.removeFromCart} />
       </div>
     );
   }
 }
 
-const getProductById = (products, productId) =>
-  products.find(p => p._id === productId);
+const getProductById = (products, productId) => products.find(p => p._id === productId);
 
 const populateCartItems = (cart, products) => ({
   ...cart,
   items: cart.items.map(item => ({
     ...item,
-    product: getProductById(products, item.productId)
-  }))
+    product: getProductById(products, item.productId),
+  })),
 });
 
 const mapStateToProps = state => ({
   isProductsLoading: state.product.isLoading,
   products: state.product.products,
-  cart: populateCartItems(state.cart.cart, state.product.products)
+  cart: populateCartItems(state.cart.cart, state.product.products),
 });
 
 const mapDispatchToProps = {
   fetchProducts,
   fetchCart,
-  addToCart
+  addToCart,
+  removeFromCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
