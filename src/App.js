@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ProductsGrid from './components/productGrid';
 import CartTable from './components/cartTable';
 import { fetchProducts } from './state/product/actions';
-import { fetchCart, addToCart, removeFromCart } from './state/cart/actions';
+import { fetchCart, addToCart, removeFromCart, updateQt } from './state/cart/actions';
 
 class App extends Component {
   componentWillMount() {
@@ -30,6 +30,7 @@ class App extends Component {
       <div className="App">
         <h1>Carrinho</h1>
         <CartTable cart={cart} removeFromCart={this.removeFromCart} />
+        <h1>Produtos</h1>
         <ProductsGrid products={products} addToCart={this.addToCart} />
       </div>
     );

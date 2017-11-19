@@ -36,10 +36,10 @@ const ProductGrid = ({ products, addToCart }) => (
 
 ProductGrid.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.number.isRequired,
     picture: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
 };

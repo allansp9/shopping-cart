@@ -27,16 +27,17 @@ const CartTable = ({ cart, removeFromCart }) => (
     <thead>
       <tr>
         <th>Produto</th>
+        <th />
         <th>Quantidade</th>
-        <th>Preço</th>
+        <th>Preço (unidade)</th>
       </tr>
     </thead>
     <tbody>
       {cart.items.map(item => (
         <tr key={item.productId}>
+          <td>{item.product.name}</td>
           <td>
-            {item.product.name}
-            <button onClick={() => removeFromCart(item)}>delete</button>
+            <button onClick={() => removeFromCart(item)}>remover</button>
           </td>
           <td>{item.quantity}</td>
           <td>R$ {item.product.price}</td>

@@ -15,15 +15,17 @@ const getFromLocalStorage = () => {
 
 export const fetch = async () => getFromLocalStorage();
 
-export const addToCart = async (productId, productPrice, quantity = 1) => {
+export const addToCart = async (productId, productPrice, quantity) => {
   const cart = await fetch();
   const product = cart.items.findIndex(item => item.productId === productId);
 
   if (product > -1) {
-    throw 'Produto já está no carrinho!';
+    throw 'Produto já está no carrinho';
   }
+
   const newItem = {
     productId,
+    productPrice,
     quantity,
   };
   const newCart = {
