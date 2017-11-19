@@ -21,7 +21,12 @@ export function* fetchCart() {
 
 export function* addToCart(action) {
   try {
-    const cart = yield call(cartApi.addToCart, action.productId, action.quantity);
+    const cart = yield call(
+      cartApi.addToCart,
+      action.productId,
+      action.productPrice,
+      action.quantity,
+    );
     yield put(addToCartSuccess(cart));
   } catch (error) {
     yield put(addToCartFailure(error));
@@ -30,7 +35,7 @@ export function* addToCart(action) {
 
 export function* removeFromCart(action) {
   try {
-    const cart = yield call(cartApi.removeFromCart, action.productId, action.quantity);
+    const cart = yield call(cartApi.removeFromCart, action.productId, action.productPrice);
     yield put(removeFromCartSuccess(cart));
   } catch (error) {
     yield put(removeFromCartFailure(error));

@@ -21,9 +21,10 @@ export const fetchCartFailure = error => ({
   type: FETCH_CART_FAILURE,
   error,
 });
-export const addToCart = (productId, quantity) => ({
+export const addToCart = (productId, productPrice, quantity) => ({
   type: ADD_TO_CART,
   productId,
+  productPrice,
   quantity,
 });
 export const addToCartSuccess = cart => ({
@@ -34,9 +35,10 @@ export const addToCartFailure = error => ({
   type: ADD_TO_CART_FAILURE,
   error,
 });
-export const removeFromCart = productId => ({
+export const removeFromCart = (productId, productPrice) => ({
   type: REMOVE_FROM_CART,
   productId,
+  productPrice,
 });
 export const removeFromCartSuccess = cart => ({
   type: REMOVE_FROM_CART_SUCCESS,

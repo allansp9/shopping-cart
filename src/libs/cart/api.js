@@ -7,6 +7,7 @@ const saveToLocalStorage = (cart) => {
 const getFromLocalStorage = () => {
   const emptyCart = {
     items: [],
+    totalPrice: [],
   };
   const cart = JSON.parse(localStorage.getItem('cart'));
   return cart || emptyCart;
@@ -14,14 +15,12 @@ const getFromLocalStorage = () => {
 
 export const fetch = async () => getFromLocalStorage();
 
-export const addToCart = async (productId, quantity = 1) => {
+export const addToCart = async (productId, productPrice, quantity = 1) => {
   const cart = await fetch();
-  const exists = cart.items.findIndex(item => item.productId === productId) > -1;
+  const product = cart.items.findIndex(item => item.productId === productId);
 
-  if (exists) {
-    throw {
-      message: 'Este produto já está no carrinho!',
-    };
+  if (product > -1) {
+    throw 'Produto já está no carrinho!';
   }
   const newItem = {
     productId,
@@ -30,6 +29,7 @@ export const addToCart = async (productId, quantity = 1) => {
   const newCart = {
     ...cart,
     items: [...cart.items, newItem],
+    totalPrice: [...cart.totalPrice, parseFloat(productPrice)],
   };
 
   saveToLocalStorage(newCart);
@@ -37,11 +37,12 @@ export const addToCart = async (productId, quantity = 1) => {
   return newCart;
 };
 
-export const removeFromCart = async (productId) => {
+export const removeFromCart = async (productId, productPrice) => {
   const cart = await fetch();
   const newCart = {
     ...cart,
     items: [...cart.items.filter(item => item.productId !== productId)],
+    totalPrice: [...cart.totalPrice.filter(item => item !== parseFloat(productPrice))],
   };
 
   saveToLocalStorage(newCart);

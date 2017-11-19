@@ -17,13 +17,18 @@ const Wrapper = styled.table`
     background: #ddd;
   }
 `;
+
+function getSum(totalPrice) {
+  return totalPrice.reduce((sum, value) => sum + value, 0);
+}
+
 const CartTable = ({ cart, removeFromCart }) => (
   <Wrapper>
     <thead>
       <tr>
         <th>Produto</th>
-        <th>Preço</th>
         <th>Quantidade</th>
+        <th>Preço</th>
       </tr>
     </thead>
     <tbody>
@@ -31,12 +36,15 @@ const CartTable = ({ cart, removeFromCart }) => (
         <tr key={item.productId}>
           <td>
             {item.product.name}
-            <button onClick={() => removeFromCart(item.productId)}>delete</button>
+            <button onClick={() => removeFromCart(item)}>delete</button>
           </td>
-          <td>{item.product.price}</td>
           <td>{item.quantity}</td>
+          <td>R$ {item.product.price}</td>
         </tr>
       ))}
+      <tr>
+        <td>Total: R${getSum(cart.totalPrice)}</td>
+      </tr>
     </tbody>
   </Wrapper>
 );
@@ -51,6 +59,7 @@ CartTable.propTypes = {
       productId: PropTypes.string.isRequired,
       quantity: PropTypes.number.isRequired,
     })).isRequired,
+    // totalPrice: PropTypes.number.isRequired,
   }).isRequired,
   removeFromCart: PropTypes.func.isRequired,
 };

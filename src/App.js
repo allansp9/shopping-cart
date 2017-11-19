@@ -12,11 +12,11 @@ class App extends Component {
   }
 
   addToCart = (product) => {
-    this.props.addToCart(product._id, 1);
+    this.props.addToCart(product._id, product.price, 1);
   };
 
-  removeFromCart = (product) => {
-    this.props.removeFromCart(product);
+  removeFromCart = (item) => {
+    this.props.removeFromCart(item.productId, item.product.price);
   };
 
   render() {
@@ -28,9 +28,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <ProductsGrid products={products} addToCart={this.addToCart} />
         <h1>Carrinho</h1>
         <CartTable cart={cart} removeFromCart={this.removeFromCart} />
+        <ProductsGrid products={products} addToCart={this.addToCart} />
       </div>
     );
   }
@@ -44,6 +44,7 @@ const populateCartItems = (cart, products) => ({
     ...item,
     product: getProductById(products, item.productId),
   })),
+  totalPrice: cart.totalPrice,
 });
 
 const mapStateToProps = state => ({

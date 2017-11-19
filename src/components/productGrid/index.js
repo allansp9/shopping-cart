@@ -27,6 +27,7 @@ const ProductGrid = ({ products, addToCart }) => (
       <ProductWrapper key={product._id}>
         <ProductImage src={product.picture} />
         <ProductName>{product.name}</ProductName>
+        <p>{product.price}</p>
         <button onClick={() => addToCart(product)}> Add to Cart </button>
       </ProductWrapper>
     ))}
@@ -38,6 +39,7 @@ ProductGrid.propTypes = {
     _id: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
 };
