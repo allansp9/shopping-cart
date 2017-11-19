@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from 'material-ui/Button';
 import ProductsGrid from './components/productGrid';
 import CartTable from './components/cartTable';
 import { fetchProducts } from './state/product/actions';
-import { fetchCart, addToCart, removeFromCart, updateQt } from './state/cart/actions';
+import { fetchCart, addToCart, removeFromCart } from './state/cart/actions';
 
 class App extends Component {
   componentWillMount() {
     this.props.fetchProducts();
     this.props.fetchCart();
   }
+
+  state = {
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
 
   addToCart = (product) => {
     this.props.addToCart(product._id, product.price, 1);
@@ -28,8 +41,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Carrinho</h1>
-        <CartTable cart={cart} removeFromCart={this.removeFromCart} />
+        <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
+        <CartTable
+          cart={cart}
+          open={this.state.open}
+          handleClickOpen={this.handleClickOpen}
+          handleRequestClose={this.handleRequestClose}
+          removeFromCart={this.removeFromCart}
+        />
         <h1>Produtos</h1>
         <ProductsGrid products={products} addToCart={this.addToCart} />
       </div>

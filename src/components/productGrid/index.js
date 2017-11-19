@@ -1,37 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const ProductWrapper = styled.div`
-  flex-basis: 24%;
-  margin-bottom: 20px;
-`;
-
-const ProductImage = styled.img`
-  width: 100%;
-`;
-
-const ProductName = styled.div`
-  margin: 10px 0;
-`;
 
 const ProductGrid = ({ products, addToCart }) => (
-  <Wrapper>
+  <div>
     {products.map(product => (
-      <ProductWrapper key={product._id}>
-        <ProductImage src={product.picture} />
-        <ProductName>{product.name}</ProductName>
+      <div key={product._id}>
+        <div src={product.picture} />
+        <div>{product.name}</div>
         <p>{product.price}</p>
         <button onClick={() => addToCart(product)}> Add to Cart </button>
-      </ProductWrapper>
+      </div>
     ))}
-  </Wrapper>
+  </div>
 );
 
 ProductGrid.propTypes = {
