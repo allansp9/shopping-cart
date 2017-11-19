@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { addToCart } from '../../state/cart/sagas';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,9 +13,13 @@ const ProductWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const ProductImage = styled.img`width: 100%;`;
+const ProductImage = styled.img`
+  width: 100%;
+`;
 
-const ProductName = styled.div`margin: 10px 0;`;
+const ProductName = styled.div`
+  margin: 10px 0;
+`;
 
 const ProductGrid = ({ products, addToCart }) => (
   <Wrapper>

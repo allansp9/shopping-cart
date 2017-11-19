@@ -1,9 +1,9 @@
-import { fork, takeLatest, call, put } from "redux-saga/effects";
-import { FETCH_PRODUCTS } from "../actionTypes";
-import * as productApi from "../../libs/product/api";
-import { fetchProductsSuccess, fetchProductsFailure } from "./actions";
+import { fork, takeLatest, call, put } from 'redux-saga/effects';
+import { FETCH_PRODUCTS } from '../actionTypes';
+import * as productApi from '../../libs/product/api';
+import { fetchProductsSuccess, fetchProductsFailure } from './actions';
 
-export function* fetchProducts(action) {
+export function* fetchProducts() {
   try {
     const products = yield call(productApi.fetchAll);
     yield put(fetchProductsSuccess(products));
@@ -16,6 +16,6 @@ export function* watchFetchProducts() {
   yield takeLatest(FETCH_PRODUCTS, fetchProducts);
 }
 
-export default function*() {
+export default function* () {
   yield fork(watchFetchProducts);
 }

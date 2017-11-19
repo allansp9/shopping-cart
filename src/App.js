@@ -11,11 +11,11 @@ class App extends Component {
     this.props.fetchCart();
   }
 
-  addToCart = product => {
+  addToCart = (product) => {
     this.props.addToCart(product._id, 1);
   };
 
-  removeFromCart = product => {
+  removeFromCart = (product) => {
     this.props.removeFromCart(product);
   };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { removeFromCart } from '../../state/cart/sagas';
 
 const Wrapper = styled.table`
   width: 100%;
