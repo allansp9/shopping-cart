@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Badge from 'material-ui/Badge';
+import ShoppingCart from 'material-ui-icons/ShoppingCart';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
 import ProductsGrid from './components/productGrid';
 import CartTable from './components/cartTable';
 import { fetchProducts } from './state/product/actions';
 import { fetchCart, addToCart, removeFromCart } from './state/cart/actions';
 
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%',
+  },
+  flex: {
+    justifyContent: 'flex-end',
+  },
+  menuButton: {
+    flex: 1,
+  },
+});
+
 class App extends Component {
+  state = {
+    open: false,
+  };
   componentWillMount() {
     this.props.fetchProducts();
     this.props.fetchCart();
   }
-
-  state = {
-    open: false,
-  };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -33,15 +51,25 @@ class App extends Component {
   };
 
   render() {
-    const { cart, isProductLoading, products } = this.props;
+    const {
+      cart, isProductLoading, products, classes,
+    } = this.props;
 
     if (isProductLoading) {
       return <h2>Carregando Loja...</h2>;
     }
 
     return (
-      <div className="App">
-        <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
+      <div className={classes.root.App}>
+        <AppBar position="static">
+          <Toolbar className={classes.flex}>
+            <IconButton onClick={this.handleClickOpen} className={classes.menuButton.flex}>
+              <Badge className={classes.badge} badgeContent={cart.items.length} color="accent">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
         <CartTable
           cart={cart}
           open={this.state.open}
@@ -49,7 +77,6 @@ class App extends Component {
           handleRequestClose={this.handleRequestClose}
           removeFromCart={this.removeFromCart}
         />
-        <h1>Produtos</h1>
         <ProductsGrid products={products} addToCart={this.addToCart} />
       </div>
     );
@@ -80,4 +107,4 @@ const mapDispatchToProps = {
   removeFromCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(App));

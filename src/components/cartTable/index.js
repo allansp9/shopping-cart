@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Dialog from 'material-ui/Dialog';
@@ -68,20 +67,5 @@ const CartTable = ({
     </Dialog>
   </div>
 );
-
-CartTable.propTypes = {
-  cart: PropTypes.shape({
-    items: PropTypes.arrayOf(PropTypes.shape({
-      product: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-      }).isRequired,
-      productId: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-    })).isRequired,
-    // totalPrice: PropTypes.number.isRequired,
-  }).isRequired,
-  removeFromCart: PropTypes.func.isRequired,
-};
 
 export default withStyles(styles)(CartTable);
