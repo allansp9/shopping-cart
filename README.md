@@ -1,6 +1,6 @@
 # Shopping Cart App
 
-##Tecnologias utilizadas:
+## Tecnologias utilizadas:
 
 - React
 - Redux
