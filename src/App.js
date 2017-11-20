@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from 'material-ui/Button';
+import 'typeface-roboto';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Badge from 'material-ui/Badge';
-import ShoppingCart from 'material-ui-icons/ShoppingCart';
 import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+import { CartOutline, EmailOutline, GithubCircle } from 'mdi-material-ui';
 import ProductsGrid from './components/productGrid';
 import CartTable from './components/cartTable';
 import { fetchProducts } from './state/product/actions';
 import { fetchCart, addToCart, removeFromCart } from './state/cart/actions';
 
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3,
-    width: '100%',
-  },
+const styles = {
   flex: {
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   menuButton: {
     flex: 1,
   },
-});
+  icon: {
+    color: 'white',
+  },
+  footer: {
+    justifyContent: 'center',
+  },
+};
 
 class App extends Component {
   state = {
@@ -60,12 +63,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.root.App}>
-        <AppBar position="static">
+      <div className={classes.App}>
+        <AppBar>
           <Toolbar className={classes.flex}>
+            <Typography type="title" color="inherit">
+              Produtos
+            </Typography>
             <IconButton onClick={this.handleClickOpen} className={classes.menuButton.flex}>
               <Badge className={classes.badge} badgeContent={cart.items.length} color="accent">
-                <ShoppingCart />
+                <CartOutline className={classes.icon} />
               </Badge>
             </IconButton>
           </Toolbar>
@@ -78,6 +84,16 @@ class App extends Component {
           removeFromCart={this.removeFromCart}
         />
         <ProductsGrid products={products} addToCart={this.addToCart} />
+        <AppBar position="static" color="default">
+          <Toolbar className={classes.footer}>
+            <IconButton href="https://github.com/allansp9" target="_blank">
+              <GithubCircle />
+            </IconButton>
+            <IconButton href="mailto:allansp9@gmail.com">
+              <EmailOutline />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
       </div>
     );
   }

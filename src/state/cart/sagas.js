@@ -7,7 +7,7 @@ import {
   removeFromCartSuccess,
   removeFromCartFailure,
 } from './actions';
-import { ADD_TO_CART, FETCH_CART, REMOVE_FROM_CART, UPDATE_QT } from '../actionTypes';
+import { ADD_TO_CART, FETCH_CART, REMOVE_FROM_CART } from '../actionTypes';
 import * as cartApi from '../../libs/cart/api';
 
 export function* fetchCart() {
